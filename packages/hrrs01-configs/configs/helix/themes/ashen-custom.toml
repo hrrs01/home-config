@@ -1,0 +1,4 @@
+"inherits" = "ashen"
+"ui.selection" = {"bg" = "#1d5e96"}
+"ui.selection.primary" = {"bg" = "#3083c6"}
+"ui.virtual.inlay-hint" = "#aa7722"

@@ -1,0 +1,5 @@
+[[snippets]]
+prefix = "ld"
+scope = ["stub"]
+body = 'log.debug("$1")'
+description = "log at debug level"

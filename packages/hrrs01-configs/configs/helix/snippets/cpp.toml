@@ -1,0 +1,11 @@
+[[snippets]]
+prefix = "func"
+scope = ["cpp"]
+body = '$1 $2($3){}'
+description = "Function template"
+
+[[snippets]]
+prefix = "cls"
+scope = ["cpp"]
+body = 'class $1{\n\n};'
+description = "Class template"

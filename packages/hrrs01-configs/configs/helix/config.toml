@@ -1,0 +1,96 @@
+theme = "ashen-custom"
+[editor]
+bufferline = "always"
+true-color = true
+statusline.right = [ "diagnostics", "selections", "position", "position-percentage", "file-encoding"]
+cursor-shape = { normal = "block", insert = "bar", select = "underline"}
+
+[editor.lsp]
+display-inlay-hints = true
+inlay-hints-length-limit = 140 # This may change
+
+[keys.normal]
+"D" = ["ensure_selections_forward", "extend_to_line_end"]
+"A-j" = [ "extend_to_line_bounds", "delete_selection", "paste_after" ]     
+"A-k" = [ "extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before" ]     
+"A-r" = "remove_selections" # as A-k is replaced with vscode like functionality..     
+"ø" = "switch_to_lowercase"
+"Ø" = "switch_to_uppercase"
+"A-ø" = "switch_case"
+# Appending 1 just to make sure we dont select something else
+"æ" = "@a1<esc>bwcfalse<esc>bwb"
+"Æ" = "@a1<esc>bwctrue<esc>bwb"
+"A-s" = [ ":format", ":write" ]
+"A-h" = ["goto_line_start", "goto_first_nonwhitespace"]
+"A-l" = "goto_line_end_newline"
+"A-w" = ":bclose"
+"tab" = "@gn"
+"S-tab" = "@gp"
+"L" = "@]"
+"H" = "@["
+"X" = ["extend_line_up", "extend_to_line_bounds"]
+"'" = ["flip_selections"]
+"A-x" = "@*xS<ret>"
+"A-f" = [":sh floating-yazi"] # Floating yazi pane
+"A-g" = [":sh floating-lazygit"] # Floating lazygit pane
+"A-t" = [":sh floating-terminal"] # Floating terminal pane
+"A-n" = [":sh floating-notes"] # Floating notebook pane
+"A-a" = [":sh floating-claude"] # Floating claude cli
+"i" = ["collapse_selection", "insert_mode"]
+"a" = ["append_mode", "collapse_selection"]
+"F5" = ":config-reload"
+"F6" = ":toggle lsp.display-inlay-hints"
+"F12" = "@gd"
+"S-F12" = "@gr"
+"F10" = "@gy"
+"F2" = "@<space>r"
+
+[keys.insert]
+"C-a" = ["goto_line_start", "goto_first_nonwhitespace"]
+"C-e" = "goto_line_end_newline"
+"A-l" = "move_char_right"
+"A-h" = "move_char_left"
+"A-j" = "move_line_down"
+"A-k" = "move_line_up"
+"A-v" = "select_mode"
+"A-t" = [":insert-output date -u +'TODO(Håvard Nygård, %%Y-%%m-%%d):'", "goto_line_end", "move_char_right"]
+
+[keys.normal."space".n]
+"s" = [":sh git add .",":sh git commit -m \"Last changes: `date -u +'%%d/%%m/%%Y - %%T'`\" ", ":sh git push", ":redraw"]
+"u" = [":sh git pull"]
+
+[keys.normal."space".C]
+"b" = "@i/**<esc>o *@brief 123<esc>o*@param<esc>o*@return<esc>o*/<esc>kmi/s123<ret>c"
+"l" = "@i/**<esc>o *@brief 123<esc>o*<esc>o*<esc>o*@param<esc>o*@return<esc>o*/<esc>kmi/s123<ret>c"
+
+[keys.normal."space".q]
+"w" = "@<space>d%se<space>warn"
+"e" = "@<space>d%se<space>err"
+"W" = "@<space>D%se<space>warn"
+"E" = "@<space>D%se<space>err"
+
+# Minor mode for just commands
+[keys.normal."+"]
+"d" = ":sh just deploy"
+"D" = ":sh just deploy-and-run"
+"A-d" = ":sh just deploy-and-debug"
+
+[keys.select]
+"A-h" = ["goto_line_start", "goto_first_nonwhitespace"]
+"A-l" = "goto_line_end_newline"
+"V" = ["goto_first_nonwhitespace", "extend_to_line_end"]
+"D" = ["ensure_selections_forward", "extend_to_line_end"]
+"i" = ["collapse_selection", "insert_mode"]
+"A-r" = "remove_selections" # To keep it consistent     
+"tab" = "@gn"
+"S-tab" = "@gp"
+"L" = "@]"
+"H" = "@["
+"F5" = ":config-reload"
+"F6" = ":toggle lsp.display-inlay-hints"
+
+[keys.normal."space"]
+"C-d" = ":insert-output date -u +'%%Y-%%m-%%d'"
+"B"   = ":echo %sh{git blame -L %(cursor_line),+1 %(buffer_name)}"
+"t" = "@/TODO<ret>"
+

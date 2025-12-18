@@ -1,0 +1,8 @@
+InlayHints:
+  Enabled: Yes
+  BlockEnd: Yes
+  ParameterNames: Yes
+  DeducedTypes: Yes
+  DefaultArguments: Yes
+  Designators: Yes
+  TypeNameLimit: 40 # As we use long namespaces..
