@@ -1,6 +1,11 @@
 { inputs, config, pkgs, lib, system, ... }:
 let pkgs_unstable = import inputs.nixpkgs_unstable { inherit system; };
 in {
+
+  home.username = lib.mkDefault "hrrs01";
+  home.stateVersion = lib.mkDefault "25.05";
+  home.homeDirectory = lib.mkDefault "/home/hrrs01";
+
   home.packages = with pkgs; [
     # REGULAR PROGRAMS, PACKAGES, AND TOOLS
     lazygit
@@ -9,7 +14,7 @@ in {
     markdown-oxide
     kdiff3
     simple-completion-language-server
-    internal.hrrs01-config
+    internal.hrrs01-configs
     cmake-language-server
     ruff
     python3Packages.python-lsp-server
@@ -101,23 +106,23 @@ in {
     # Force it into the config folder for helix editor
     force = true; # Force its regeneration for every generation
     recursive = true;
-    source = "${pkgs.internal.hrrs01-config}/configs/helix/snippets";
+    source = "${pkgs.internal.hrrs01-configs}/configs/helix/snippets";
   };
 
   xdg.configFile."helix/config.toml" = {
     force = true;
-    source = "${pkgs.internal.hrrs01-config}/configs/helix/config.toml";
+    source = "${pkgs.internal.hrrs01-configs}/configs/helix/config.toml";
   };
 
   xdg.configFile."helix/themes" = {
     force = true;
     recursive = true;
-    source = "${pkgs.internal.hrrs01-config}/configs/helix/themes";
+    source = "${pkgs.internal.hrrs01-configs}/configs/helix/themes";
   };
 
   xdg.configFile."helix/languages.toml" = {
     force = true;
-    source = "${pkgs.internal.hrrs01-config}/configs/helix/languages.toml";
+    source = "${pkgs.internal.hrrs01-configs}/configs/helix/languages.toml";
   };
   ## END OF HELIX CONFIG
 
@@ -127,7 +132,7 @@ in {
   ## It should however respect this
   xdg.configFile."clangd/config.yaml" = {
     force = true;
-    source = "${pkgs.internal.hrrs01-config}/configs/clangd/config.yaml";
+    source = "${pkgs.internal.hrrs01-configs}/configs/clangd/config.yaml";
   };
 
   ## START OF YAZI CONFIG
@@ -161,7 +166,7 @@ in {
   # as Nix to KDL converter is broken
   xdg.configFile."zellij/config.kdl" = {
     force = true;
-    source = "${pkgs.internal.hrrs01-config}/configs/zellij/config.kdl";
+    source = "${pkgs.internal.hrrs01-configs}/configs/zellij/config.kdl";
   };
   ## END OF YAZI CONFIG
 }
