@@ -17,6 +17,8 @@ in {
     starship
     uv
 
+    emacs
+
     pokeget-rs
     lemminx
 
