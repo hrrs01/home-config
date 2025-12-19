@@ -26,6 +26,8 @@ in {
     aichat
     htop
 
+    morph
+
     # ALIASES FOR AI
     (pkgs.writeShellScriptBin "ai" ''
       ${pkgs.aichat}/bin/aichat "$@"
