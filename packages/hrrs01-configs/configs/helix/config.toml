@@ -36,6 +36,7 @@ inlay-hints-length-limit = 140 # This may change
 "A-t" = [":sh floating-terminal"] # Floating terminal pane
 "A-n" = [":sh floating-notes"] # Floating notebook pane
 "A-a" = [":sh floating-claude"] # Floating claude cli
+"A-q" = [":sh floating-gemini"] # Floating gemini cli
 "i" = ["collapse_selection", "insert_mode"]
 "a" = ["append_mode", "collapse_selection"]
 "F5" = ":config-reload"

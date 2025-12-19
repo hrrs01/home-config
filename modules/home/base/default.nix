@@ -35,6 +35,9 @@ in {
     (writeShellScriptBin "floating-claude" ''
       zellij run -c -f --width 80% --height 80% -x 10% -y 10% -- claude
     '')
+    (writeShellScriptBin "floating-gemini" ''
+      zellij run -c -f --width 80% --height 80% -x 10% -y 10% -- gemini
+    '')
     (writeShellScriptBin "pipe-to-helix" ''
       #!/bin/env bash
       zellij action toggle-floating-panes
