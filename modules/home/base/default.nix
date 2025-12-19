@@ -161,8 +161,8 @@ in {
 
   ## START OF YAZI CONFIG
   programs.zellij = {
-    enable = true;
-    enableBashIntegration = true;
+    enable = false;
+    enableBashIntegration = false;
   };
 
   # Create zellij config externally
