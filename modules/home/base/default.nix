@@ -17,8 +17,6 @@ in {
     starship
     uv
 
-    emacs
-
     pokeget-rs
     lemminx
 
@@ -163,6 +161,11 @@ in {
   programs.zellij = {
     enable = false;
     enableBashIntegration = false;
+  };
+
+  programs.wezterm = {
+    enable = true;
+    enableBashIntegration = true;
   };
 
   # Create zellij config externally
