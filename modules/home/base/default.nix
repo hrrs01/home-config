@@ -35,38 +35,26 @@ in {
 
     # PROFILE GLOBAL SCRIPTS
     (writeShellScriptBin "floating-claude" ''
-      zellij run -c -f --width 80% --height 80% -x 10% -y 10% -- claude
+      wezterm.exe cli split-pane -- claude
     '')
     (writeShellScriptBin "floating-gemini" ''
-      zellij run -c -f --width 80% --height 80% -x 10% -y 10% -- gemini
-    '')
-    (writeShellScriptBin "pipe-to-helix" ''
-      #!/bin/env bash
-      zellij action toggle-floating-panes
-      zellij action write 27 # send escape key
-      for selected_file in "$@"
-      do
-        zellij action write-chars ":open $selected_file"
-        zellij action write 13 # Send enter key
-      done
-      zellij action toggle-floating-panes
-      zellij action close-pane
+      wezterm.exe cli split-pane -- gemini
     '')
     (writeShellScriptBin "floating-yazi" ''
       #!/bin/env bash
-      zellij run -c -f --width 80% --height 80% -x 10% -y 10% -- yazi "$PWD"
+      wezterm.exe cli split-pane -- yazi "$PWD"
     '')
     (writeShellScriptBin "floating-lazygit" ''
       #!/bin/env bash
-      zellij run -c -f --width 95% --height 95% -x 2% -y 2% -- lazygit
+      wezterm.exe cli split-pane -- lazygit
     '')
     (writeShellScriptBin "floating-terminal" ''
       #!/bin/env bash
-      zellij run -c -f --width 80% --height 80% -x 10% -y 10% -- bash
+      wezterm.exe cli split-pane -- bash
     '')
     (writeShellScriptBin "floating-notes" ''
       #!/bin/env bash
-      zellij run -c -f --width 80% --height 80% -x 10% -y 10% --cwd ~/my-notes -- hx .
+      wezterm.exe cli split-pane -- cd "$PWD" && hx .
     '')
 
   ];
