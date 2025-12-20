@@ -28,35 +28,6 @@ in {
 
     morph
 
-    # ALIASES FOR AI
-    (pkgs.writeShellScriptBin "ai" ''
-      ${pkgs.aichat}/bin/aichat "$@"
-    '')
-
-    # PROFILE GLOBAL SCRIPTS
-    (writeShellScriptBin "floating-claude" ''
-      wezterm.exe cli split-pane -- claude
-    '')
-    (writeShellScriptBin "floating-gemini" ''
-      wezterm.exe cli split-pane -- gemini
-    '')
-    (writeShellScriptBin "floating-yazi" ''
-      #!/bin/env bash
-      wezterm.exe cli split-pane -- yazi "$PWD"
-    '')
-    (writeShellScriptBin "floating-lazygit" ''
-      #!/bin/env bash
-      wezterm.exe cli split-pane -- lazygit
-    '')
-    (writeShellScriptBin "floating-terminal" ''
-      #!/bin/env bash
-      wezterm.exe cli split-pane -- bash
-    '')
-    (writeShellScriptBin "floating-notes" ''
-      #!/bin/env bash
-      wezterm.exe cli split-pane -- cd "$PWD" && hx .
-    '')
-
   ];
 
   programs.git = {
