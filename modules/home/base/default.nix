@@ -101,9 +101,10 @@ in {
     enable = true;
     enableBashIntegration = true;
     settings = {
+      manager = { ratio = [ 0 1 0 ]; };
       opener = {
         helix = [{
-          run = ''pipe-to-helix "$@"'';
+          run = ''hx "$@"'';
           desc = "Use yazi as a file picker within helix";
         }];
       };
