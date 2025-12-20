@@ -17,6 +17,7 @@ in {
     starship
     uv
 
+    pkgs_unstable.urdf-viz
     pokeget-rs
     lemminx
 
