@@ -29,8 +29,6 @@ in {
       scalpel
       # Viewing and editing image metadata
       exiftool
-      # Intercepting proxy
-      burpsuite
       # Network discovery
       nmap
 
