@@ -1,11 +1,5 @@
-{ lib, config, inputs, pkgs, system, ... }:
-let cfg = config.services.ctf;
-
-in {
-  options.services.ctf = {
-    enable = lib.mkEnableOption "Enable CTF related packages";
-  };
-  config = lib.mkIf cfg.enable {
+{ lib, config, inputs, pkgs, system, ... }: {
+  config = {
     home.packages = with pkgs; [
       # Because strings is nice
       binutils
@@ -16,8 +10,7 @@ in {
       # Because sometimes you need to program
       gcc
       # Python with common tools for CTFs
-      (python3.withPackages
-        (ps: [ ps.pwntools ps.ropper ]))
+      (python3.withPackages (ps: [ ps.pwntools ps.ropper ]))
       # Quickly check a binaries security properties
       checksec
       # RE framework
