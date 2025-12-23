@@ -17,8 +17,6 @@ in {
       gcc
       # Python with common tools for CTFs
       (python3.withPackages (ps: [ ps.pwntools ps.ropper ]))
-      # Quickly check a binaries security properties
-      checksec
       # RE framework
       cutter
       # Single instruction gadget finder for getting shells
