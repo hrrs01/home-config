@@ -1,4 +1,4 @@
-{ lib, config, inputs, pkgs, system, ... }: {
+{ lib, config, inputs, pkgs, ... }: {
   config = {
     home.packages = with pkgs; [
       # Because strings is nice
@@ -6,7 +6,7 @@
       # Because disassemblers are nice
       ghidra-bin
       # Because GDB gets alot better
-      inputs.pwndbg."${system}".default
+      inputs.pwndbg.packages."${pkgs.system}".default
       # Because sometimes you need to program
       gcc
       # Python with common tools for CTFs
