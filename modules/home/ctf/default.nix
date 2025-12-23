@@ -1,12 +1,18 @@
-{ lib, config, inputs, pkgs, ... }: {
+{ lib, config, inputs, pkgs, system, ... }:
+let
+  pkgs_25_11 = import inputs.nixpkgs-25-11 {
+    inherit system;
+    allowUnfree = true;
+  };
+in {
   config = {
-    home.packages = with pkgs; [
+    home.packages = with pkgs_25_11; [
       # Because strings is nice
       binutils
       # Because disassemblers are nice
       ghidra-bin
       # Because GDB gets alot better
-      inputs.pwndbg.packages."${pkgs.system}".default
+      inputs.pwndbg.packages."${system}".default
       # Because sometimes you need to program
       gcc
       # Python with common tools for CTFs
