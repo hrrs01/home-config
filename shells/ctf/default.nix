@@ -4,8 +4,7 @@ let
     inherit system;
     config.allowUnfree = true;
   };
-in
-pkgs_25_11.mkShell {
+in pkgs_25_11.mkShell {
   packages = with pkgs_25_11; [
     # Because strings is nice
     binutils
@@ -29,6 +28,17 @@ pkgs_25_11.mkShell {
     exiftool
     # Network discovery
     nmap
+
+    # As nix doesnt provide all tooling usually needed
+    busybox
+
+    # Stag is painful
+    stegseek
+    steghide
+    outguess
+
+    # Because some ctfs like to use mail
+    mailutils
 
     # Bruteforcing
     hashcat
