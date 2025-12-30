@@ -4,6 +4,10 @@ let
     inherit system;
     config.allowUnfree = true;
   };
+  pwndbg-wrapped = pkgs_25_11.writeShellScriptBin "pwndbg" ''
+    unset PYTHONPATH
+    exec ${inputs.pwndbg.packages."${system}".default}/bin/pwndbg "$@"
+  '';
 in pkgs_25_11.mkShell {
   packages = with pkgs_25_11; [
     # Because strings is nice
@@ -11,7 +15,7 @@ in pkgs_25_11.mkShell {
     # Because disassemblers are nice
     ghidra-bin
     # Because GDB gets alot better
-    inputs.pwndbg.packages."${system}".default
+    pwndbg-wrapped
     # Because sometimes you need to program
     gcc
     # Python with common tools for CTFs
