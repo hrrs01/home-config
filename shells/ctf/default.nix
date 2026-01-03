@@ -24,6 +24,8 @@ in pkgs_25_11.mkShell {
     cutter
     # Single instruction gadget finder for getting shells
     one_gadget
+    # CyberChef but in the CLI
+    pkgs.internal.chepy
     # For analyzing and extracting firmware
     binwalk
     # For recovering hidden or deleted files
