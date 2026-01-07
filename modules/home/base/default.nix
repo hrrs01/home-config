@@ -17,6 +17,8 @@ in {
     starship
     uv
 
+    eza
+
     pkgs_unstable.urdf-viz
     pokeget-rs
     lemminx
@@ -48,6 +50,9 @@ in {
   programs.bash = {
     enable = true;
     sessionVariables = { EDITOR = "hx"; };
+    bashrcExtra = ''
+      alias lg="lazygit"
+    '';
   };
 
   ## START OF HELIX CONFIG
