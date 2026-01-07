@@ -52,6 +52,8 @@ in {
     sessionVariables = { EDITOR = "hx"; };
     bashrcExtra = ''
       alias lg="lazygit"
+      alias ls="eza -l"
+      alias lt="eza -lT"
     '';
   };
 
