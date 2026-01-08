@@ -19,6 +19,8 @@ in {
 
     eza
 
+    opcua-commander
+
     pkgs_unstable.urdf-viz
     pokeget-rs
     lemminx
