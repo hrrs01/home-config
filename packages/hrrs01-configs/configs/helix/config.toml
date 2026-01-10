@@ -17,9 +17,6 @@ inlay-hints-length-limit = 140 # This may change
 "ø" = "switch_to_lowercase"
 "Ø" = "switch_to_uppercase"
 "A-ø" = "switch_case"
-# Appending 1 just to make sure we dont select something else
-"æ" = "@a1<esc>bwcfalse<esc>bwb"
-"Æ" = "@a1<esc>bwctrue<esc>bwb"
 "A-s" = [ ":format", ":write" ]
 "A-h" = ["goto_line_start", "goto_first_nonwhitespace"]
 "A-l" = "goto_line_end_newline"
