@@ -1,0 +1,2 @@
+(require "helix/editor.scm")
+

@@ -14,6 +14,8 @@ stdenv.mkDerivation {
     mkdir -p $out/configs/zellij
 
     # Copy helix configs
+    cp $src/configs/helix/init.scm $out/configs/helix/init.scm
+    cp $src/configs/helix/helix.scm $out/configs/helix/helix.scm
     cp $src/configs/helix/config.toml $out/configs/helix/config.toml
     cp $src/configs/helix/languages.toml $out/configs/helix/languages.toml
     cp -r $src/configs/helix/themes/* $out/configs/helix/themes/

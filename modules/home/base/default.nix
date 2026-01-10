@@ -1,7 +1,9 @@
 { inputs, config, pkgs, lib, system, ... }:
 let
   pkgs_unstable = import inputs.nixpkgs_unstable { inherit system; };
-  helix-with-plugins = inputs.helix-flake.packages.${system}.helix;
+  helix-from-flake = inputs.helix-flake.packages.${system}.default;
+  helix-with-plugins = helix-from-flake.overrideAttrs
+    (prev: { cargoBuildFlags = "--features steel,git"; });
 in {
 
   home.packages = with pkgs; [
@@ -34,6 +36,7 @@ in {
     htop
 
     morph
+    steel
 
   ];
 
@@ -86,6 +89,16 @@ in {
   xdg.configFile."helix/config.toml" = {
     force = true;
     source = "${pkgs.internal.hrrs01-configs}/configs/helix/config.toml";
+  };
+
+  xdg.configFile."helix/init.scm" = {
+    force = true;
+    source = "${pkgs.internal.hrrs01-configs}/configs/helix/init.scm";
+  };
+
+  xdg.configFile."helix/helix.scm" = {
+    force = true;
+    source = "${pkgs.internal.hrrs01-configs}/configs/helix/helix.scm";
   };
 
   xdg.configFile."helix/themes" = {
