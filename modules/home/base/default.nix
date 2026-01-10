@@ -1,5 +1,7 @@
 { inputs, config, pkgs, lib, system, ... }:
-let pkgs_unstable = import inputs.nixpkgs_unstable { inherit system; };
+let
+  pkgs_unstable = import inputs.nixpkgs_unstable { inherit system; };
+  helix-with-plugins = inputs.helix-flake.packages.${system}.helix;
 in {
 
   home.packages = with pkgs; [
@@ -61,9 +63,11 @@ in {
 
   ## START OF HELIX CONFIG
   programs.helix = {
+    package = helix-with-plugins;
     enable = true;
     defaultEditor = true;
     extraPackages = [
+      pkgs.steel
       pkgs.nixfmt
       pkgs.simple-completion-language-server
       pkgs.cmake-language-server
