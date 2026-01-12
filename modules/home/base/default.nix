@@ -37,6 +37,11 @@ in {
 
     morph
     steel
+    # Some nice to have shell scripts
+    (pkgs.writeShellScriptBin "telemetry-compose" ''
+      cd ~/telemetry-stack
+      docker compose --file docker-compose.yml --project-directory . up --abort-on-container-exit --remove-orphans
+    '')
 
   ];
 
