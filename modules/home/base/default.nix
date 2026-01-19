@@ -8,7 +8,8 @@ in {
 
   home.packages = with pkgs; [
     # REGULAR PROGRAMS, PACKAGES, AND TOOLS
-    lazygit
+    pkgs_unstable.lazygit
+    pkgs_unstable.delta
     libxml2
     marksman
     markdown-oxide
@@ -175,6 +176,17 @@ in {
     enable = true;
     enableBashIntegration = true;
   };
+  home.activation.copyLazygitConfig =
+    config.lib.dag.entryAfter [ "writeBoundary" ] ''
+      run echo "Copying lazygit configuration..."
+      CONFIG_DIR="${config.home.homeDirectory}/.config/lazygit"
+      SOURCE_FILE="${pkgs.internal.hrrs01-configs}/configs/lazygit/config.yml"
+
+      run mkdir -p "$CONFIG_DIR"
+      run rm -f "$CONFIG_DIR/config.yml"
+      run cp -f "$SOURCE_FILE" "$CONFIG_DIR/config.yml"
+      run chmod +w "$CONFIG_DIR/config.yml"
+    '';
 
   # Create zellij config externally (copied for easy iteration)
   # as Nix to KDL converter is broken

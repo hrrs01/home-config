@@ -4,6 +4,7 @@ bufferline = "always"
 true-color = true
 statusline.right = [ "diagnostics", "selections", "position", "position-percentage", "file-encoding"]
 cursor-shape = { normal = "block", insert = "bar", select = "underline"}
+end-of-line-diagnostics = "disable"
 
 [editor.lsp]
 display-inlay-hints = true
