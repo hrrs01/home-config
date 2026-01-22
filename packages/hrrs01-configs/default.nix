@@ -19,7 +19,7 @@ stdenv.mkDerivation {
     cp $src/configs/helix/helix.scm $out/configs/helix/helix.scm
     cp $src/configs/helix/config.toml $out/configs/helix/config.toml
     cp $src/configs/helix/languages.toml $out/configs/helix/languages.toml
-    cp $src/configs/lazygit/config.yml $out/configs/lazygit/config.yml 
+    cp $src/configs/lazygit/config.yml $out/configs/lazygit/config.yml
     cp -r $src/configs/helix/themes/* $out/configs/helix/themes/
     cp -r $src/configs/helix/snippets/* $out/configs/helix/snippets/
 

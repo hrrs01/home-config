@@ -1,6 +1,9 @@
 { inputs, config, pkgs, lib, system, ... }:
 let
-  pkgs_unstable = import inputs.nixpkgs_unstable { inherit system; };
+  pkgs_unstable = import inputs.nixpkgs_unstable {
+    inherit system;
+    config.allowUnfree = true;
+  };
   helix-from-flake = inputs.helix-flake.packages.${system}.default;
   helix-with-plugins = helix-from-flake.overrideAttrs
     (prev: { cargoBuildFlags = "--features steel,git"; });
@@ -10,17 +13,20 @@ in {
     # REGULAR PROGRAMS, PACKAGES, AND TOOLS
     pkgs_unstable.lazygit
     pkgs_unstable.delta
+    pkgs_unstable.github-copilot-cli
     libxml2
     marksman
     markdown-oxide
     kdiff3
     simple-completion-language-server
     internal.hrrs01-configs
+    internal.obsidian-cli
     cmake-language-server
     ruff
     python3Packages.python-lsp-server
     starship
     uv
+    pkgs_unstable.obsidian
 
     eza
 
