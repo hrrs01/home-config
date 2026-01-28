@@ -86,4 +86,7 @@ inlay-hints-length-limit = 140 # This may change
 "C-d" = ":insert-output date -u +'%%Y-%%m-%%d'"
 "B"   = ":echo %sh{git blame -L %(cursor_line),+1 %(buffer_name)}"
 "t" = "@/TODO<ret>"
+"C-f" = ":pipe fend"
 
+[keys.select."space"]
+"C-f" = ":pipe fend"
