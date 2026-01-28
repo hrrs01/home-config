@@ -27,6 +27,9 @@ in {
     starship
     uv
     pkgs_unstable.obsidian
+    pkgs_unstable.emacs
+
+    fend
 
     eza
 
