@@ -62,7 +62,7 @@ in {
   programs.git = {
     enable = true;
     userName = "hrrs01";
-    userEmail = "haavard.nygaard@motiontech.no";
+    userEmail = "haavard.hn@gmail.com";
     signing = {
       key = "E161992434923AA3"; # Set to your GPG key ID
       signByDefault = true;
