@@ -39,6 +39,10 @@ in {
     pokeget-rs
     lemminx
 
+    # Node.js/React LSP
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted
+
     # AI
     helix-gpt
     lsp-ai
@@ -76,6 +80,7 @@ in {
       alias lg="lazygit"
       alias ls="eza -l"
       alias lt="eza -lT"
+      alias openclaw="ssh -N -L 18789:127.0.0.1:18789 root@72.62.150.71"
     '';
   };
 
@@ -91,6 +96,8 @@ in {
       pkgs.cmake-language-server
       pkgs.ruff
       pkgs.python3Packages.python-lsp-server
+      pkgs.nodePackages.typescript-language-server
+      pkgs.nodePackages.vscode-langservers-extracted
     ];
   };
 
