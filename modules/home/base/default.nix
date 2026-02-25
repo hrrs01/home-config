@@ -63,6 +63,19 @@ in {
     enable = true;
     userName = "hrrs01";
     userEmail = "haavard.nygaard@motiontech.no";
+    signing = {
+      key = "E161992434923AA3"; # Set to your GPG key ID
+      signByDefault = true;
+    };
+  };
+
+  programs.gpg = { enable = true; };
+
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 3600;
+    maxCacheTtl = 7200;
+    pinentryPackage = pkgs.pinentry-curses;
   };
 
   programs.nushell = { enable = true; };
@@ -75,7 +88,10 @@ in {
 
   programs.bash = {
     enable = true;
-    sessionVariables = { EDITOR = "hx"; };
+    sessionVariables = {
+      EDITOR = "hx";
+      GPG_TTY = "$(tty)";
+    };
     bashrcExtra = ''
       alias lg="lazygit"
       alias ls="eza -l"
