@@ -29,6 +29,7 @@
       channels-config = {
         allowUnfree = true;
       };
+
     };
 
 }
