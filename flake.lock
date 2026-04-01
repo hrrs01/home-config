@@ -77,11 +77,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1767848123,
-        "narHash": "sha256-mwBidBPgKcmFvu86R61kgIIAeNujec2h7z71oD+tC9M=",
+        "lastModified": 1774804218,
+        "narHash": "sha256-5h6eicp0+qzgiDrWc0mlTiX+jvcx8d54Fp922uQ2p0k=",
         "owner": "mattwparas",
         "repo": "helix",
-        "rev": "921e1011f95674769072f7368531c63f6b017caa",
+        "rev": "912d8d8b97da21de9b44b4e24a476e193e7cc44d",
         "type": "github"
       },
       "original": {
@@ -98,27 +98,27 @@
         ]
       },
       "locked": {
-        "lastModified": 1763992789,
-        "narHash": "sha256-WHkdBlw6oyxXIra/vQPYLtqY+3G8dUVZM8bEXk0t8x4=",
+        "lastModified": 1774875830,
+        "narHash": "sha256-WPYlTmZvVa9dWlAziFkVjBdv1Z6giNIq40O1DxsBmiI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "44831a7eaba4360fb81f2acc5ea6de5fde90aaa3",
+        "rev": "7afd8cebb99e25a64a745765920e663478eb8830",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-25.05",
+        "ref": "release-25.11",
         "repo": "home-manager",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1759381078,
-        "narHash": "sha256-gTrEEp5gEspIcCOx9PD8kMaF1iEmfBcTbO0Jag2QhQs=",
+        "lastModified": 1770841267,
+        "narHash": "sha256-9xejG0KoqsoKEGp2kVbXRlEYtFFcDTHjidiuX8hGO44=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "7df7ff7d8e00218376575f0acdcc5d66741351ee",
+        "rev": "ec7c70d12ce2fc37cb92aff673dcdca89d187bae",
         "type": "github"
       },
       "original": {
@@ -128,13 +128,13 @@
         "type": "github"
       }
     },
-    "nixpkgs-25-11": {
+    "nixpkgs_2": {
       "locked": {
-        "lastModified": 1767480499,
-        "narHash": "sha256-8IQQUorUGiSmFaPnLSo2+T+rjHtiNWc+OAzeHck7N48=",
+        "lastModified": 1774799055,
+        "narHash": "sha256-Tsq9BCz0q47ej1uFF39m4tuhcwru/ls6vCCJzutEpaw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "30a3c519afcf3f99e2c6df3b359aec5692054d92",
+        "rev": "107cba9eb4a8d8c9f8e9e61266d78d340867913a",
         "type": "github"
       },
       "original": {
@@ -144,29 +144,13 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1767051569,
-        "narHash": "sha256-0MnuWoN+n1UYaGBIpqpPs9I9ZHW4kynits4mrnh1Pk4=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "40ee5e1944bebdd128f9fbada44faefddfde29bd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-25.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_unstable": {
       "locked": {
-        "lastModified": 1767379071,
-        "narHash": "sha256-EgE0pxsrW9jp9YFMkHL9JMXxcqi/OoumPJYwf+Okucw=",
+        "lastModified": 1774709303,
+        "narHash": "sha256-D3Q07BbIA2KnTcSXIqqu9P586uWxN74zNoCH3h2ESHg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fb7944c166a3b630f177938e478f0378e64ce108",
+        "rev": "8110df5ad7abf5d4c0f6fb0f8f978390e77f9685",
         "type": "github"
       },
       "original": {
@@ -182,9 +166,9 @@
         "helix-flake": "helix-flake",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-25-11": "nixpkgs-25-11",
         "nixpkgs_unstable": "nixpkgs_unstable",
-        "snowfall-lib": "snowfall-lib"
+        "snowfall-lib": "snowfall-lib",
+        "windows-config": "windows-config"
       }
     },
     "rust-overlay": {
@@ -195,11 +179,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1759631821,
-        "narHash": "sha256-V8A1L0FaU/aSXZ1QNJScxC12uP4hANeRBgI4YdhHeRM=",
+        "lastModified": 1770952264,
+        "narHash": "sha256-CjymNrJZWBtpavyuTkfPVPaZkwzIzGaf0E/3WgcwM14=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "1d7cbdaad90f8a5255a89a6eddd8af24dc89cafe",
+        "rev": "ec6a3d5cdf14bb5a1dd03652bd3f6351004d2188",
         "type": "github"
       },
       "original": {
@@ -258,6 +242,22 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "windows-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775032421,
+        "narHash": "sha256-NHaQ/8Kd9/V/fwTJUOVbq71FYD7kamRuCvyb0iWmEJQ=",
+        "ref": "refs/heads/main",
+        "rev": "98d9f0820ab8ac94725ca1d854a4e40c3805f181",
+        "revCount": 15,
+        "type": "git",
+        "url": "ssh://git@github.com/hrrs01/windows-config.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/hrrs01/windows-config.git"
       }
     }
   },

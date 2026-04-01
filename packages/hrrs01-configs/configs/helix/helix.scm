@@ -2,7 +2,6 @@
 
 (require (prefix-in helix. "helix/commands.scm"))
 (require (prefix-in helix.static. "helix/static.scm"))
-(require "mattwparas-helix-package/splash.scm")
 
 (provide git-add
          open-helix-scm
@@ -40,5 +39,3 @@
 (define (git-add)
   (expanded-shell "git" "add" "%"))
 
-(when (equal? (command-line) '("hx"))
-  (show-splash))
