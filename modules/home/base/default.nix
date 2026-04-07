@@ -21,7 +21,7 @@ in
 
     # Temporary
     brave
-    claude-code
+    pkgs_unstable.claude-code
     slack
     mattermost-desktop
 
@@ -79,7 +79,7 @@ in
     userName = "hrrs01";
     userEmail = "haavard.hn@gmail.com";
     signing = {
-      key = "94DFCD695DD7C2F0"; # Set to your GPG key ID
+      key = "6EA457D3B78C4A50"; # Set to your GPG key ID
       signByDefault = true;
     };
   };
