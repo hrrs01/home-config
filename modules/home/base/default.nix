@@ -35,7 +35,6 @@ in
     kdiff3
     simple-completion-language-server
     internal.hrrs01-configs
-    internal.obsidian-cli
     cmake-language-server
     ruff
     python3Packages.python-lsp-server
