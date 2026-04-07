@@ -21,6 +21,7 @@ in
 
     # Temporary
     brave
+    pkgs_unstable.protonmail-desktop
     pkgs_unstable.claude-code
     slack
     mattermost-desktop
