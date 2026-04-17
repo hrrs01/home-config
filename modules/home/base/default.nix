@@ -23,7 +23,7 @@ in
     spotify
     brave
     pkgs_unstable.protonmail-desktop
-    pkgs_unstable.claude-code
+    internal.claude-code
     slack
     mattermost-desktop
 
