@@ -122,6 +122,7 @@ in
       alias ls="eza -l"
       alias lt="eza -lT"
       alias load-axon="nix develop $HOME/code/axon-nix-fhs"
+      alias sign-gpg="echo 'cache' | gpg --clearsign > /dev/null"
       alias openclaw="ssh -N -L 18789:127.0.0.1:18789 root@72.62.150.71"
     '';
   };
