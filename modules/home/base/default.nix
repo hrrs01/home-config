@@ -22,6 +22,7 @@ in
     # Temporary
     spotify
     brave
+    vivaldi
     pkgs_unstable.protonmail-desktop
     internal.claude-code
     slack
