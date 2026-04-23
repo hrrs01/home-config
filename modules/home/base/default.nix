@@ -123,7 +123,7 @@ in
       alias lg="lazygit"
       alias ls="eza -l"
       alias lt="eza -lT"
-      alias local-qwen="export ANTHROPIC_BASE_URL=http://localhost:1234 && export ANTHROPIC_AUTH_TOKEN=lmstudio && claude --model qwen/qwen3.6-27b"
+      alias local-qwen="export ANTHROPIC_BASE_URL=http://localhost:1234 && export ANTHROPIC_AUTH_TOKEN=lmstudio && claude --model lmstudio-community/qwen2.5-coder-3b-instruct"
       alias local-gemma="export ANTHROPIC_BASE_URL=http://localhost:1234 && export ANTHROPIC_AUTH_TOKEN=lmstudio && claude --model google/gemma-4-e4b"
       alias load-axon="nix develop $HOME/code/axon-nix-fhs"
       alias load-kimi="export PATH=$PATH:$HOME/.local/bin"
