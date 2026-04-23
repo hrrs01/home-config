@@ -61,6 +61,7 @@ in
     nodePackages.vscode-langservers-extracted
 
     # AI
+    pkgs_unstable.lmstudio
     helix-gpt
     lsp-ai
     aichat
@@ -122,7 +123,10 @@ in
       alias lg="lazygit"
       alias ls="eza -l"
       alias lt="eza -lT"
+      alias local-qwen="export ANTHROPIC_BASE_URL=http://localhost:1234 && export ANTHROPIC_AUTH_TOKEN=lmstudio && claude --model qwen/qwen3.6-27b"
+      alias local-gemma="export ANTHROPIC_BASE_URL=http://localhost:1234 && export ANTHROPIC_AUTH_TOKEN=lmstudio && claude --model google/gemma-4-e4b"
       alias load-axon="nix develop $HOME/code/axon-nix-fhs"
+      alias load-kimi="export PATH=$PATH:$HOME/.local/bin"
       alias sign-gpg="echo 'cache' | gpg --clearsign > /dev/null"
       alias openclaw="ssh -N -L 18789:127.0.0.1:18789 root@72.62.150.71"
     '';
