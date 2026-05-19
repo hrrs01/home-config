@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "coding-agents": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1777035876,
+        "narHash": "sha256-jD+6KbA+LURa+2ZXpGAyJ7b0MsNuG58meMFSaobG8G8=",
+        "owner": "kissgyorgy",
+        "repo": "coding-agents",
+        "rev": "d5406a0d9f4ca9aed5af95452c405abee058fbde",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kissgyorgy",
+        "repo": "coding-agents",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -73,7 +91,7 @@
     },
     "helix-flake": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "rust-overlay": "rust-overlay"
       },
       "locked": {
@@ -114,6 +132,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1772736753,
+        "narHash": "sha256-au/m3+EuBLoSzWUCb64a/MZq6QUtOV8oC0D9tY2scPQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "917fec990948658ef1ccd07cef2a1ef060786846",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1775036866,
         "narHash": "sha256-ZojAnPuCdy657PbTq5V0Y+AHKhZAIwSIT2cb8UgAz/U=",
         "owner": "nixos",
@@ -128,7 +162,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1776067740,
         "narHash": "sha256-B35lpsqnSZwn1Lmz06BpwF7atPgFmUgw1l8KAV3zpVQ=",
@@ -162,10 +196,11 @@
     },
     "root": {
       "inputs": {
+        "coding-agents": "coding-agents",
         "flake-utils": "flake-utils",
         "helix-flake": "helix-flake",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs_unstable": "nixpkgs_unstable",
         "snowfall-lib": "snowfall-lib",
         "windows-config": "windows-config"
