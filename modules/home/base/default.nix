@@ -15,6 +15,7 @@ let
   helix-with-plugins = helix-from-flake.overrideAttrs (prev: {
     cargoBuildFlags = "--features steel,git";
   });
+  zed-preview = inputs.zed-preview.packages.${system}.default;
 in
 {
   home.packages = with pkgs; [
@@ -29,9 +30,8 @@ in
     mattermost-desktop
 
     # REGULAR PROGRAMS, PACKAGES, AND TOOLS
-    pkgs_unstable.lazygit
     pkgs_unstable.delta
-    pkgs_unstable.github-copilot-cli
+    pkgs_unstable.lazygit
     libxml2
     marksman
     markdown-oxide
@@ -45,6 +45,8 @@ in
     uv
     pkgs_unstable.obsidian
     pkgs_unstable.emacs
+
+    zed-preview
 
     fend
 

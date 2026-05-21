@@ -1,6 +1,15 @@
 {
   description = "A nix flake containing hrrs01's home config";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://zed.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "zed.cachix.org-1:FJMBiFBoaRbJMJmJbcNLJJhEW/yl2kbcOuAObHOwxNY="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs_unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -20,6 +29,9 @@
     };
     coding-agents = {
       url = "github:kissgyorgy/coding-agents";
+    };
+    zed-preview = {
+      url = "github:zed-industries/zed?ref=v1.4.0-pre";
     };
   };
 
