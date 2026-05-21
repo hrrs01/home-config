@@ -15,7 +15,6 @@ let
   helix-with-plugins = helix-from-flake.overrideAttrs (prev: {
     cargoBuildFlags = "--features steel,git";
   });
-  zed-preview = inputs.zed-preview.packages.${system}.default;
 in
 {
   home.packages = with pkgs; [
@@ -46,7 +45,7 @@ in
     pkgs_unstable.obsidian
     pkgs_unstable.emacs
 
-    zed-preview
+    internal.zed-preview
 
     fend
 
