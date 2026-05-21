@@ -3,21 +3,22 @@
   stdenv,
   fetchurl,
   autoPatchelfHook,
-  vulkan-loader,
-  libGL,
-  libxkbcommon,
-  wayland,
-  xorg,
+  patchelf,
   alsa-lib,
-  nss,
-  libdrm,
-  mesa,
-  gtk3,
-  glib,
-  dbus,
   fontconfig,
   freetype,
+  glib,
+  gtk3,
+  libGL,
+  libdrm,
+  libxkbcommon,
+  mesa,
+  nss,
   openssl,
+  vulkan-loader,
+  wayland,
+  xorg,
+  zlib,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "zed-preview";
@@ -30,45 +31,51 @@ stdenv.mkDerivation (finalAttrs: {
 
   sourceRoot = "zed-preview.app";
 
-  nativeBuildInputs = [ autoPatchelfHook ];
+  nativeBuildInputs = [
+    autoPatchelfHook
+    patchelf
+  ];
 
   buildInputs = [
     stdenv.cc.cc.lib
-    vulkan-loader
+    alsa-lib
+    fontconfig
+    freetype
+    glib
+    gtk3
+    libdrm
     libGL
     libxkbcommon
+    mesa
+    nss
+    openssl
     wayland
     xorg.libX11
     xorg.libxcb
     xorg.libXau
     xorg.libXdmcp
-    alsa-lib
-    nss
-    libdrm
-    mesa
-    gtk3
-    glib
-    dbus
-    fontconfig
-    freetype
-    openssl
+    xorg.libXext
+    zlib
   ];
 
-  runtimeDependencies = [
-    vulkan-loader
-    libGL
-    wayland
+  appendRunpaths = [
+    (lib.makeLibraryPath [
+      libGL
+      vulkan-loader
+      wayland
+    ])
   ];
+
+  dontConfigure = true;
+  dontBuild = true;
 
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/bin $out/libexec $out/lib
-    cp -r lib/* $out/lib/
+    mkdir -p $out/bin $out/libexec $out/share
+    cp bin/zed $out/bin/zed-preview
     cp libexec/zed-editor $out/libexec/
-    cp bin/zed $out/bin/zed
 
-    mkdir -p $out/share
     cp -r share/* $out/share/
 
     runHook postInstall
@@ -78,7 +85,7 @@ stdenv.mkDerivation (finalAttrs: {
     description = "Zed editor preview release";
     homepage = "https://zed.dev";
     license = lib.licenses.gpl3Only;
-    mainProgram = "zed";
+    mainProgram = "zed-preview";
     platforms = [ "x86_64-linux" ];
   };
 })
