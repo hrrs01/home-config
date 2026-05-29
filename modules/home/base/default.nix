@@ -264,4 +264,17 @@ in
     run chmod +w "$CONFIG_DIR/config.kdl"
   '';
   ## END OF ZELLIJ CONFIG
+
+  ## START OF ZED CONFIG
+  home.activation.copyZedConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    run echo "Copying Zed configuration..."
+    CONFIG_DIR="${config.home.homeDirectory}/.config/zed"
+    SOURCE_DIR="${pkgs.internal.hrrs01-configs}/configs/zed"
+
+    run mkdir -p "$CONFIG_DIR"
+    run rm -f "$CONFIG_DIR/keymap.json"
+    run cp -f "$SOURCE_DIR/keymap.json" "$CONFIG_DIR/keymap.json"
+    run chmod +w "$CONFIG_DIR/keymap.json"
+  '';
+  ## END OF ZED CONFIG
 }

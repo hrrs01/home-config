@@ -13,6 +13,7 @@ stdenv.mkDerivation {
     mkdir -p $out/configs/clangd
     mkdir -p $out/configs/zellij
     mkdir -p $out/configs/lazygit
+    mkdir -p $out/configs/zed
 
     # Copy helix configs
     cp $src/configs/helix/init.scm $out/configs/helix/init.scm
@@ -28,6 +29,9 @@ stdenv.mkDerivation {
 
     # Copy zellij configs
     cp $src/configs/zellij/config.kdl $out/configs/zellij/config.kdl
+
+    # Copy zed configs
+    cp $src/configs/zed/keymap.json $out/configs/zed/keymap.json
   '';
 
   meta = with lib; {
