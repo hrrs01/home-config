@@ -22,11 +22,11 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "zed-preview";
-  version = "1.5.3-pre";
+  version = "1.6.0-pre";
 
   src = fetchurl {
     url = "https://github.com/zed-industries/zed/releases/download/v${finalAttrs.version}/zed-linux-x86_64.tar.gz";
-    hash = "sha256-bupvzFc1+5TYOJN4gec4sF2m9Z+K51dyRdry7aPUXB0=";
+    hash = "sha256-lydAIo3LMB93ZTsuJYw75JR0imp+LZY3F5uv1rg8Ov4=";
   };
 
   sourceRoot = "zed-preview.app";
