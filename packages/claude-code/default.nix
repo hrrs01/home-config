@@ -1,40 +1,44 @@
 {
   lib,
   stdenv,
-  buildNpmPackage,
   fetchzip,
+  patchelf,
+  glibc,
+  makeWrapper,
   versionCheckHook,
   writableTmpDirAsHomeHook,
   bubblewrap,
   procps,
   socat,
 }:
-buildNpmPackage (finalAttrs: {
+stdenv.mkDerivation (finalAttrs: {
   pname = "claude-code";
-  version = "2.1.112";
+  version = "2.1.170";
 
   src = fetchzip {
-    url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${finalAttrs.version}.tgz";
-    hash = "sha256-SJJqU7XHbu9IRGPMJNUg6oaMZiQUKqJhI2wm7BnR1gs=";
+    url = "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-${finalAttrs.version}.tgz";
+    hash = "sha256-boRtO4oV/PP30bB0wWKYyuR2woZV3joAvqyxpiL6txs=";
   };
 
-  npmDepsHash = "sha256-bdkej9Z41GLew9wi1zdNX+Asauki3nT1+SHmBmaUIBU=";
+  nativeBuildInputs = [
+    patchelf
+    makeWrapper
+  ];
 
-  strictDeps = true;
+  dontConfigure = true;
+  dontBuild = true;
+  dontAutoPatchelf = true;
+  dontStrip = true;
+  dontPatchShebangs = true;
 
-  postPatch = ''
-    cp ${./package-lock.json} package-lock.json
-
-    substituteInPlace cli.js \
-          --replace-fail '#!/bin/sh' '#!/usr/bin/env sh'
-  '';
-
-  dontNpmBuild = true;
-
-  env.AUTHORIZED = "1";
-
-  postInstall = ''
-    wrapProgram $out/bin/claude \
+  installPhase = ''
+    runHook preInstall
+    install -Dm755 claude $out/lib/claude-code/claude
+    patchelf \
+      --set-interpreter ${glibc}/lib/ld-linux-x86-64.so.2 \
+      --set-rpath ${glibc}/lib \
+      $out/lib/claude-code/claude
+    makeWrapper $out/lib/claude-code/claude $out/bin/claude \
       --set DISABLE_AUTOUPDATER 1 \
       --set-default FORCE_AUTOUPDATE_PLUGINS 1 \
       --set DISABLE_INSTALLATION_CHECKS 1 \
@@ -50,6 +54,7 @@ buildNpmPackage (finalAttrs: {
           ]
         )
       }
+    runHook postInstall
   '';
 
   doInstallCheck = true;
@@ -65,6 +70,7 @@ buildNpmPackage (finalAttrs: {
     downloadPage = "https://www.npmjs.com/package/@anthropic-ai/claude-code";
     license = lib.licenses.unfree;
     mainProgram = "claude";
-    sourceProvenance = with lib.sourceTypes; [ binaryBytecode ];
+    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
+    platforms = [ "x86_64-linux" ];
   };
 })
