@@ -46,6 +46,7 @@ in
     pkgs_unstable.emacs
 
     internal.zed-preview
+    internal.uaexpert
 
     fend
     remmina
