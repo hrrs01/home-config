@@ -48,6 +48,7 @@ in
     internal.zed-preview
 
     fend
+    remmina
 
     eza
 
