@@ -52,6 +52,7 @@ in
     remmina
 
     eza
+    wl-clipboard
 
     opcua-commander
 
