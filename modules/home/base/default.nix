@@ -136,6 +136,10 @@ in
     '';
   };
 
+  programs.obs-studio = {
+    enable = true;
+  };
+
   ## START OF HELIX CONFIG
   programs.helix = {
     package = helix-with-plugins;
