@@ -4,6 +4,10 @@
   fetchurl,
   autoPatchelfHook,
   makeWrapper,
+  libGL,
+  zlib,
+  glib,
+  qt5,
 }:
 
 stdenv.mkDerivation rec {
@@ -20,12 +24,21 @@ stdenv.mkDerivation rec {
     makeWrapper
   ];
 
-  # Bundled ICU 56 and Qt5 are too old to satisfy from nixpkgs; we keep them
-  # and expose them via LD_LIBRARY_PATH in the wrapper instead.
+  buildInputs = [
+    stdenv.cc.cc.lib
+    libGL
+    zlib
+    glib
+    qt5.qtbase
+    qt5.qtwayland
+  ];
+
+  # Bundled ICU 56 is too old for nixpkgs; keep it for LD_LIBRARY_PATH.
+  # Qt5 comes from nixpkgs (ABI-compatible across Qt5.x).
   autoPatchelfIgnoreMissingDeps = true;
 
   sourceRoot = ".";
-
+  dontWrapQtApps = true;
   dontConfigure = true;
   dontBuild = true;
 
@@ -35,11 +48,13 @@ stdenv.mkDerivation rec {
     mkdir -p $out/opt/easy-profiler $out/bin
 
     install -m755 bin/profiler_gui bin/profiler_converter $out/opt/easy-profiler/
-    cp bin/*.so* $out/opt/easy-profiler/
-    cp -r bin/iconengines bin/imageformats $out/opt/easy-profiler/
+    # Only keep bundled ICU 56 and easy_profiler; Qt5 is sourced from nixpkgs
+    cp bin/libicu*.so* bin/libeasy_profiler.so $out/opt/easy-profiler/
 
     makeWrapper $out/opt/easy-profiler/profiler_gui $out/bin/profiler-gui \
-      --set LD_LIBRARY_PATH "$out/opt/easy-profiler"
+      --set LD_LIBRARY_PATH "$out/opt/easy-profiler" \
+      --set QT_QPA_PLATFORM "wayland" \
+      --set QT_PLUGIN_PATH "${qt5.qtbase.bin}/lib/qt-${qt5.qtbase.version}/plugins:${qt5.qtwayland.bin}/lib/qt-${qt5.qtwayland.version}/plugins"
     makeWrapper $out/opt/easy-profiler/profiler_converter $out/bin/profiler-converter \
       --set LD_LIBRARY_PATH "$out/opt/easy-profiler"
 
