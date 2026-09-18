@@ -20,6 +20,7 @@ in
   home.packages = with pkgs; [
 
     # Temporary
+    ripgrep
     spotify
     brave
     vivaldi
