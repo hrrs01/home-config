@@ -62,13 +62,8 @@ in
     pokeget-rs
     lemminx
 
-    # Node.js/React LSP
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted
-
     # AI
     pkgs_unstable.lmstudio
-    helix-gpt
     lsp-ai
     aichat
     htop
@@ -154,8 +149,6 @@ in
       pkgs.cmake-language-server
       pkgs.ruff
       pkgs.python3Packages.python-lsp-server
-      pkgs.nodePackages.typescript-language-server
-      pkgs.nodePackages.vscode-langservers-extracted
     ];
   };
 
