@@ -45,6 +45,8 @@ in
     uv
     pkgs_unstable.obsidian
     pkgs_unstable.emacs
+    fd
+    jujutsu
 
     internal.zed-preview
     internal.uaexpert
@@ -108,6 +110,15 @@ in
     enable = true;
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
   programs.starship = {
     enable = true;
     enableBashIntegration = true;
@@ -124,6 +135,10 @@ in
       alias lg="lazygit"
       alias ls="eza -l"
       alias lt="eza -lT"
+      alias cat="bat -pp"
+      alias ccat="bat"
+      alias cd="z"
+      alias ci="zi"
       alias local-qwen="export ANTHROPIC_BASE_URL=http://localhost:1234 && export ANTHROPIC_AUTH_TOKEN=lmstudio && claude --model lmstudio-community/qwen2.5-coder-3b-instruct"
       alias local-gemma="export ANTHROPIC_BASE_URL=http://localhost:1234 && export ANTHROPIC_AUTH_TOKEN=lmstudio && claude --model google/gemma-4-e4b"
       alias load-axon="nix develop $HOME/code/axon-nix-fhs"
