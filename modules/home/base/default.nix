@@ -70,6 +70,9 @@ in
     aichat
     htop
 
+    # calculator
+    qalculate-qt
+
     morph
     steel
     # Some nice to have shell scripts

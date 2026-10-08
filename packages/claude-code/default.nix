@@ -13,11 +13,11 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "claude-code";
-  version = "2.1.170";
+  version = "2.1.292";
 
   src = fetchzip {
     url = "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-${finalAttrs.version}.tgz";
-    hash = "sha256-boRtO4oV/PP30bB0wWKYyuR2woZV3joAvqyxpiL6txs=";
+    hash = "sha256-ftQUZjnDPASs0E27Ii5s0afEHkEfj7NLb7I72x46dIc=";
   };
 
   nativeBuildInputs = [
@@ -34,14 +34,18 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
     install -Dm755 claude $out/lib/claude-code/claude
+    # Only patch the interpreter. This is a bun single-file executable with a
+    # payload trailer appended to the ELF; patchelf --set-rpath grows the file
+    # and corrupts that trailer (segfault at startup), so libraries are supplied
+    # via LD_LIBRARY_PATH in the wrapper instead.
     patchelf \
       --set-interpreter ${glibc}/lib/ld-linux-x86-64.so.2 \
-      --set-rpath ${glibc}/lib \
       $out/lib/claude-code/claude
     makeWrapper $out/lib/claude-code/claude $out/bin/claude \
       --set DISABLE_AUTOUPDATER 1 \
       --set-default FORCE_AUTOUPDATE_PLUGINS 1 \
       --set DISABLE_INSTALLATION_CHECKS 1 \
+      --prefix LD_LIBRARY_PATH : ${glibc}/lib \
       --unset DEV \
       --prefix PATH : ${
         lib.makeBinPath (
