@@ -1,10 +1,37 @@
-{ inputs, config, pkgs, lib, system, ... }:
-let pkgs_unstable = import inputs.nixpkgs_unstable { inherit system; };
-in {
-
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  system,
+  ...
+}:
+let
+  pkgs_unstable = import inputs.nixpkgs_unstable {
+    inherit system;
+    config.allowUnfree = true;
+  };
+  helix-from-flake = inputs.helix-flake.packages.${system}.default;
+  helix-with-plugins = helix-from-flake.overrideAttrs (prev: {
+    cargoBuildFlags = "--features steel,git";
+  });
+in
+{
   home.packages = with pkgs; [
+
+    bat
+    ripgrep
+    spotify
+    brave
+    vivaldi
+    pkgs_unstable.protonmail-desktop
+    internal.claude-code
+    slack
+    mattermost-desktop
+
     # REGULAR PROGRAMS, PACKAGES, AND TOOLS
-    lazygit
+    pkgs_unstable.delta
+    pkgs_unstable.lazygit
     libxml2
     marksman
     markdown-oxide
@@ -16,8 +43,20 @@ in {
     python3Packages.python-lsp-server
     starship
     uv
+    pkgs_unstable.obsidian
+    pkgs_unstable.emacs
+    fd
+    jujutsu
+
+    internal.zed-preview
+    internal.uaexpert
+    internal.easy-profiler
+
+    fend
+    remmina
 
     eza
+    wl-clipboard
 
     opcua-commander
 
@@ -26,22 +65,62 @@ in {
     lemminx
 
     # AI
-    helix-gpt
+    pkgs_unstable.lmstudio
     lsp-ai
     aichat
     htop
 
+    # calculator
+    qalculate-qt
+
     morph
+    steel
+    # Some nice to have shell scripts
+    (pkgs.writeShellScriptBin "telemetry-compose" ''
+      cd ~/telemetry-stack
+      docker compose --file docker-compose.yml --project-directory . up --abort-on-container-exit --remove-orphans
+    '')
 
   ];
 
   programs.git = {
     enable = true;
     userName = "hrrs01";
-    userEmail = "haavard.nygaard@motiontech.no";
+    userEmail = "haavard.hn@gmail.com";
+    lfs.enable = true;
+    signing = {
+      key = "6EA457D3B78C4A50"; # Set to your GPG key ID
+      signByDefault = true;
+    };
   };
 
-  programs.nushell = { enable = true; };
+  programs.spotify-player = {
+    enable = true;
+  };
+
+  programs.gpg = {
+    enable = true;
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 3600;
+    maxCacheTtl = 7200;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
+
+  programs.nushell = {
+    enable = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+  };
 
   programs.starship = {
     enable = true;
@@ -51,19 +130,38 @@ in {
 
   programs.bash = {
     enable = true;
-    sessionVariables = { EDITOR = "hx"; };
+    sessionVariables = {
+      EDITOR = "hx";
+      GPG_TTY = "$(tty)";
+    };
     bashrcExtra = ''
       alias lg="lazygit"
       alias ls="eza -l"
       alias lt="eza -lT"
+      alias cat="bat -pp"
+      alias ccat="bat"
+      alias cd="z"
+      alias ci="zi"
+      alias local-qwen="export ANTHROPIC_BASE_URL=http://localhost:1234 && export ANTHROPIC_AUTH_TOKEN=lmstudio && claude --model lmstudio-community/qwen2.5-coder-3b-instruct"
+      alias local-gemma="export ANTHROPIC_BASE_URL=http://localhost:1234 && export ANTHROPIC_AUTH_TOKEN=lmstudio && claude --model google/gemma-4-e4b"
+      alias load-axon="nix develop $HOME/code/axon-nix-fhs"
+      alias load-kimi="export PATH=$PATH:$HOME/.local/bin"
+      alias sign-gpg="echo 'cache' | gpg --clearsign > /dev/null"
+      alias openclaw="ssh -N -L 18789:127.0.0.1:18789 root@72.62.150.71"
     '';
+  };
+
+  programs.obs-studio = {
+    enable = true;
   };
 
   ## START OF HELIX CONFIG
   programs.helix = {
+    package = helix-with-plugins;
     enable = true;
     defaultEditor = true;
     extraPackages = [
+      pkgs.steel
       pkgs.nixfmt
       pkgs.simple-completion-language-server
       pkgs.cmake-language-server
@@ -72,56 +170,74 @@ in {
     ];
   };
 
-  xdg.configFile."helix/snippets" = {
-    # Force it into the config folder for helix editor
-    force = true; # Force its regeneration for every generation
-    recursive = true;
-    source = "${pkgs.internal.hrrs01-configs}/configs/helix/snippets";
-  };
+  ## HELIX CONFIG - Copied (not symlinked) for easy iteration
+  home.activation.copyHelixConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    run echo "Copying Helix configuration..."
+    CONFIG_DIR="${config.home.homeDirectory}/.config/helix"
+    SOURCE_DIR="${pkgs.internal.hrrs01-configs}/configs/helix"
 
-  xdg.configFile."helix/config.toml" = {
-    force = true;
-    source = "${pkgs.internal.hrrs01-configs}/configs/helix/config.toml";
-  };
+    # Create helix config directory
+    run mkdir -p "$CONFIG_DIR"
 
-  xdg.configFile."helix/themes" = {
-    force = true;
-    recursive = true;
-    source = "${pkgs.internal.hrrs01-configs}/configs/helix/themes";
-  };
+    # Remove existing files/symlinks before copying
+    run rm -f "$CONFIG_DIR/config.toml"
+    run rm -f "$CONFIG_DIR/init.scm"
+    run rm -f "$CONFIG_DIR/helix.scm"
+    run rm -f "$CONFIG_DIR/languages.toml"
 
-  xdg.configFile."helix/languages.toml" = {
-    force = true;
-    source = "${pkgs.internal.hrrs01-configs}/configs/helix/languages.toml";
-  };
+    # Copy files (will overwrite existing files)
+    run cp -f "$SOURCE_DIR/config.toml" "$CONFIG_DIR/config.toml"
+    run cp -f "$SOURCE_DIR/init.scm" "$CONFIG_DIR/init.scm"
+    run cp -f "$SOURCE_DIR/helix.scm" "$CONFIG_DIR/helix.scm"
+    run cp -f "$SOURCE_DIR/languages.toml" "$CONFIG_DIR/languages.toml"
+
+    # Make copied files writable (they inherit read-only permissions from Nix store)
+    run chmod +w "$CONFIG_DIR/config.toml"
+    run chmod +w "$CONFIG_DIR/init.scm"
+    run chmod +w "$CONFIG_DIR/helix.scm"
+    run chmod +w "$CONFIG_DIR/languages.toml"
+
+    # Copy directories recursively (remove and recreate)
+    # Make files writable before removing to avoid permission errors
+    [ -d "$CONFIG_DIR/snippets" ] && run chmod -R +w "$CONFIG_DIR/snippets" || true
+    [ -d "$CONFIG_DIR/themes" ] && run chmod -R +w "$CONFIG_DIR/themes" || true
+    run rm -rf "$CONFIG_DIR/snippets"
+    run rm -rf "$CONFIG_DIR/themes"
+    run cp -rf "$SOURCE_DIR/snippets" "$CONFIG_DIR/"
+    run cp -rf "$SOURCE_DIR/themes" "$CONFIG_DIR/"
+
+    # Make copied directories and their contents writable
+    run chmod -R +w "$CONFIG_DIR/snippets"
+    run chmod -R +w "$CONFIG_DIR/themes"
+  '';
   ## END OF HELIX CONFIG
 
   ## Start of global clangd config
   ## NOTE: Clangd is not installed by the system
   ## but rather a specific version for each environment
   ## It should however respect this
-  xdg.configFile."clangd/config.yaml" = {
-    force = true;
-    source = "${pkgs.internal.hrrs01-configs}/configs/clangd/config.yaml";
-  };
+  home.activation.copyClangdConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    run echo "Copying clangd configuration..."
+    CONFIG_DIR="${config.home.homeDirectory}/.config/clangd"
+    SOURCE_FILE="${pkgs.internal.hrrs01-configs}/configs/clangd/config.yaml"
+
+    run mkdir -p "$CONFIG_DIR"
+    run rm -f "$CONFIG_DIR/config.yaml"
+    run cp -f "$SOURCE_FILE" "$CONFIG_DIR/config.yaml"
+    run chmod +w "$CONFIG_DIR/config.yaml"
+  '';
 
   ## START OF YAZI CONFIG
   programs.yazi = {
     enable = true;
     enableBashIntegration = true;
     settings = {
-      manager = { ratio = [ 0 1 0 ]; };
-      opener = {
-        helix = [{
-          run = ''hx "$@"'';
-          desc = "Use yazi as a file picker within helix";
-        }];
-      };
-      open = {
-        rules = [{
-          name = "**/*";
-          use = "helix";
-        }];
+      manager = {
+        ratio = [
+          0
+          1
+          0
+        ];
       };
     };
   };
@@ -137,12 +253,48 @@ in {
     enable = true;
     enableBashIntegration = true;
   };
+  home.activation.copyLazygitConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    run echo "Copying lazygit configuration..."
+    CONFIG_DIR="${config.home.homeDirectory}/.config/lazygit"
+    SOURCE_FILE="${pkgs.internal.hrrs01-configs}/configs/lazygit/config.yml"
+
+    run mkdir -p "$CONFIG_DIR"
+    run rm -f "$CONFIG_DIR/config.yml"
+    run cp -f "$SOURCE_FILE" "$CONFIG_DIR/config.yml"
+    run chmod +w "$CONFIG_DIR/config.yml"
+  '';
+
+  # Create zellij config externally (copied for easy iteration)
+  xdg.configFile."wezterm" = {
+    force = true;
+    recursive = true;
+    source = "${inputs.windows-config}/wezterm";
+  };
 
   # Create zellij config externally
   # as Nix to KDL converter is broken
-  xdg.configFile."zellij/config.kdl" = {
-    force = true;
-    source = "${pkgs.internal.hrrs01-configs}/configs/zellij/config.kdl";
-  };
-  ## END OF YAZI CONFIG
+  home.activation.copyZellijConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    run echo "Copying Zellij configuration..."
+    CONFIG_DIR="${config.home.homeDirectory}/.config/zellij"
+    SOURCE_FILE="${pkgs.internal.hrrs01-configs}/configs/zellij/config.kdl"
+
+    run mkdir -p "$CONFIG_DIR"
+    run rm -f "$CONFIG_DIR/config.kdl"
+    run cp -f "$SOURCE_FILE" "$CONFIG_DIR/config.kdl"
+    run chmod +w "$CONFIG_DIR/config.kdl"
+  '';
+  ## END OF ZELLIJ CONFIG
+
+  ## START OF ZED CONFIG
+  home.activation.copyZedConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    run echo "Copying Zed configuration..."
+    CONFIG_DIR="${config.home.homeDirectory}/.config/zed"
+    SOURCE_DIR="${pkgs.internal.hrrs01-configs}/configs/zed"
+
+    run mkdir -p "$CONFIG_DIR"
+    run rm -f "$CONFIG_DIR/keymap.json"
+    run cp -f "$SOURCE_DIR/keymap.json" "$CONFIG_DIR/keymap.json"
+    run chmod +w "$CONFIG_DIR/keymap.json"
+  '';
+  ## END OF ZED CONFIG
 }

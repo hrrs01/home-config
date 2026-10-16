@@ -1,0 +1,52 @@
+[
+  {
+    "context": "vim_mode == helix_normal && !menu",
+    "bindings": {
+      "shift-d": ["workspace::SendKeystrokes", "g l"],
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+      "alt-h": ["workspace::SendKeystrokes", "g s"],
+      "alt-l": ["workspace::SendKeystrokes", "g l"],
+      "alt-s": "workspace::Save",
+      "alt-w": "pane::CloseActiveItem",
+      "tab": "editor::GoToDiagnostic",
+      "shift-tab": "editor::GoToPrevDiagnostic",
+      "shift-h": ["workspace::SendKeystrokes", "["],
+      "shift-l": ["workspace::SendKeystrokes", "]"],
+      "'": ["workspace::SendKeystrokes", "alt-;"],
+      "f6": "editor::ToggleInlayHints",
+      "f12": "editor::GoToDefinition",
+      "shift-f12": "editor::FindAllReferences",
+      "f10": "editor::GoToTypeDefinition",
+      "f2": "editor::Rename",
+      "space shift-b": "editor::ToggleGitBlame",
+      "space t": ["workspace::SendKeystrokes", "/ T O D O enter"]
+    }
+  },
+  {
+    "context": "vim_mode == insert && !menu",
+    "bindings": {
+      "ctrl-a": "editor::MoveToBeginningOfLine",
+      "ctrl-e": "editor::MoveToEndOfLine",
+      "alt-h": "editor::MoveLeft",
+      "alt-l": "editor::MoveRight",
+      "alt-j": "editor::MoveDown",
+      "alt-k": "editor::MoveUp",
+      "alt-v": ["workspace::SendKeystrokes", "escape v"]
+    }
+  },
+  {
+    "context": "vim_mode == helix_select && !menu",
+    "bindings": {
+      "alt-h": ["workspace::SendKeystrokes", "g s"],
+      "alt-l": ["workspace::SendKeystrokes", "g l"],
+      "shift-v": ["workspace::SendKeystrokes", "g s g l"],
+      "shift-d": ["workspace::SendKeystrokes", "g l"],
+      "tab": "editor::GoToDiagnostic",
+      "shift-tab": "editor::GoToPrevDiagnostic",
+      "shift-h": ["workspace::SendKeystrokes", "["],
+      "shift-l": ["workspace::SendKeystrokes", "]"],
+      "f6": "editor::ToggleInlayHints"
+    }
+  }
+]

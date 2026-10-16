@@ -40,6 +40,14 @@ command = "simple-completion-language-server"
 command = "lemminx"
 args = ["--stdio"]
 
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.eslint]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
 [language-server.scls.config]
 feature_words = false
 feature_snippets = true
@@ -97,3 +105,23 @@ language-servers = ["scls"]
 name = "xml"
 auto-format = true
 formatter = { command= "xmllint", args=["--format", "-"]}
+
+[[language]]
+name = "javascript"
+auto-format = true
+language-servers = ["typescript-language-server", "eslint"]
+
+[[language]]
+name = "typescript"
+auto-format = true
+language-servers = ["typescript-language-server", "eslint"]
+
+[[language]]
+name = "tsx"
+auto-format = true
+language-servers = ["typescript-language-server", "eslint"]
+
+[[language]]
+name = "jsx"
+auto-format = true
+language-servers = ["typescript-language-server", "eslint"]
