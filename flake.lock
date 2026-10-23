@@ -78,11 +78,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792741537,
-        "narHash": "sha256-YP2HVpGXxECYZXbvE4Cw0HVKd5ruD+H+dF1zQY8nCJ4=",
+        "lastModified": 1792776884,
+        "narHash": "sha256-vK3ZMQCyq9KMMlGlNSEFqpdouce8qCFv9BrJJEP2RQg=",
         "ref": "refs/heads/main",
-        "rev": "4a62fb87d0b33f9a73de9ea9e0e8433970410ff4",
-        "revCount": 7,
+        "rev": "6106f398808da69e33d0082db0b8afe52a1ed0c9",
+        "revCount": 12,
         "type": "git",
         "url": "file:///home/hrrs01/frameshift"
       },
