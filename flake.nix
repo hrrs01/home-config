@@ -14,6 +14,10 @@
       url = "git+ssh://git@github.com/hrrs01/windows-config.git";
       flake = false;
     };
+    frameshift = {
+      url = "git+file:///home/hrrs01/frameshift";
+      inputs.nixpkgs.follows = "nixpkgs_unstable";
+    };
     snowfall-lib = {
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -71,6 +71,26 @@
         "type": "github"
       }
     },
+    "frameshift": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs_unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792741537,
+        "narHash": "sha256-YP2HVpGXxECYZXbvE4Cw0HVKd5ruD+H+dF1zQY8nCJ4=",
+        "ref": "refs/heads/main",
+        "rev": "4a62fb87d0b33f9a73de9ea9e0e8433970410ff4",
+        "revCount": 7,
+        "type": "git",
+        "url": "file:///home/hrrs01/frameshift"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/hrrs01/frameshift"
+      }
+    },
     "helix-flake": {
       "inputs": {
         "nixpkgs": "nixpkgs",
@@ -163,6 +183,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "frameshift": "frameshift",
         "helix-flake": "helix-flake",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",

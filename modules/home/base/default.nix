@@ -75,6 +75,7 @@ in
 
     morph
     steel
+    inputs.frameshift.packages.${system}.default
     # Some nice to have shell scripts
     (pkgs.writeShellScriptBin "telemetry-compose" ''
       cd ~/telemetry-stack
