@@ -49,7 +49,6 @@ in
     jujutsu
 
     internal.zed-preview
-    internal.uaexpert
     internal.easy-profiler
 
     fend
